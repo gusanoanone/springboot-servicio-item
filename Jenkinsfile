@@ -9,19 +9,15 @@ pipeline {
     stage('Test') {
       steps {
         echo 'Test'
-        sh 'docker run --rm --name app -d -p 80:80 app:test'
+        sh 'docker run -d app'
         sh '/bin/nc -vz localhost 80'
-      }
-      post {
-        always {
-        sh 'docker container stop app'
-        }
+        sh 'docker stop app'
       }
     }
     stage('Push Registry') {
       steps {
-        sh 'docker tag app:test gusanorock/app:stable'
-        sh 'docker push app:test gusanorock/app:stable'
+        sh 'docker tag app gusanorock/app:stable'
+        sh 'docker push gusanorock/app:stable'
       }
     }
   }
