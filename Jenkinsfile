@@ -16,7 +16,7 @@ pipeline {
     }
     stage('Push Registry') {
       steps {
-        echo 'Subir imagen'
+        echo 'Registry'
         sh 'docker tag app:test gusanorock/app:stable'
         sh 'docker push gusanorock/app:stable'
       }
