@@ -8,15 +8,15 @@ pipeline {
     }
     stage('Test') {
       steps {
-        echo 'TEST'
-        sh '/bin/nc -vz localhost 22'
+        echo 'Test'
+        sh 'docker run --rm --name app -p 80:80 app:test'
         sh '/bin/nc -vz localhost 80'
       }
     }
     stage('Push Registry') {
       steps {
-        sh 'docker tag app:test app:stable'
-        sh 'docker push app:test app:stable'
+        sh 'docker tag app:test gusanorock/app:stable'
+        sh 'docker push app:test gusanorock/app:stable'
       }
     }
   }
