@@ -13,6 +13,6 @@ pipeline {
     }
   }
   environment {
-    test = 'build'
+    commit = 'build'
   }
 }
